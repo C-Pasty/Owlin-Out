@@ -1,0 +1,17 @@
+.player-box {
+  width: 350px;
+  height: 350px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+#player-name {
+  text-align: center;
+}
+
+img {
+  width: 350px;
+  height: 350px;
+}

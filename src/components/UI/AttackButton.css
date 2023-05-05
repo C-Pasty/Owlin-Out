@@ -1,0 +1,34 @@
+.attack-button {
+  background-color: #3498db;
+  border: none;
+  color: white;
+  text-align: center;
+  font-size: 18px;
+  padding: 12px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.attack-button:hover {
+  background-color: #2980b9;
+}
+
+.attack-button:focus {
+  outline: none;
+}
+
+.attack-button:active {
+  transform: translateY(-2px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.attack-button:disabled {
+  background-color: #bdc3c7;
+  color: #fff;
+  cursor: not-allowed;
+}
+
+.attack-button:disabled:hover {
+  background-color: #bdc3c7;
+}

@@ -1,0 +1,45 @@
+.button-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px;
+}
+
+.menu-button {
+  background-color: #3498db;
+  border: none;
+  color: white;
+  font-size: 14px;
+  padding: 12px 24px;
+  border-radius: 6px;
+  margin-bottom: 5px;
+  width: 150px;
+  height: 45px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.menu-button:hover {
+  background-color: #2980b9;
+}
+
+.menu-button:focus {
+  outline: none;
+}
+
+.menu-button:disabled {
+  background-color: #bdc3c7;
+  color: #fff;
+  cursor: not-allowed;
+}
+
+.menu-button:disabled:hover {
+  background-color: #bdc3c7;
+}
+
+.menu-button:active {
+  background-color: #5aa9e6;
+}

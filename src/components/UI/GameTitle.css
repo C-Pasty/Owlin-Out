@@ -1,0 +1,10 @@
+.game-title {
+  font-size: 2rem;
+  font-weight: bold;
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  color: white;
+}

@@ -46,6 +46,7 @@ const playerTemplate = {
   health: 25,
   maxHealth: 25,
   gold: 0,
+  level: 1,
   experience: 0,
   attackSpeed: 1000,
   isAlive: true,
@@ -81,6 +82,7 @@ function GameContainer() {
   const [currentEnemy, setCurrentEnemy] = useState(generateNewEnemy());
   const [currentEnemyKey, setCurrentEnemyKey] = useState("worm");
   const [player, setPlayer] = useState({ ...playerTemplate });
+  const [expToNextLevel, setExpToNextLevel] = useState(10);
 
   useEffect(() => {
     if (currentEnemy.health <= 0) {
@@ -96,6 +98,22 @@ function GameContainer() {
       }));
     }
   }, [currentEnemy.health]);
+
+  useEffect(() => {
+    if (player.experience >= expToNextLevel) {
+      setPlayer((state) => {
+        const newMaxHealth = state.maxHealth + 10;
+        return {
+          ...state,
+          level: state.level + 1,
+          attack: state.attack + 3,
+          maxHealth: newMaxHealth,
+          health: newMaxHealth,
+        };
+      });
+      setExpToNextLevel(Math.floor((expToNextLevel + 10) * 1.2));
+    }
+  }, [player.experience]);
 
   useEffect(() => {
     if (player.health <= 0) {
@@ -135,7 +153,7 @@ function GameContainer() {
 
   return (
     <div className="game-container">
-      <PlayerStats player={player} />
+      <PlayerStats player={player} expToNextLevel={expToNextLevel} />
       <Player player={player} />
       <AttackButton
         currentEnemy={currentEnemy}

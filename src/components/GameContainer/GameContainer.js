@@ -7,6 +7,8 @@ import PlayerStats from "../Player/PlayerStats";
 import MenuButtons from "../UI/MenuButtons";
 import GameTitle from "../UI/GameTitle";
 import Shop from "../UI/Shop";
+import { useAtom } from "jotai";
+import { playerData } from "../../atoms";
 import "./GameContainer.css";
 
 const possibleEnemies = {
@@ -42,18 +44,18 @@ const possibleEnemies = {
   },
 };
 
-const playerTemplate = {
-  name: "Soren",
-  image: "images/Owlimage.png",
-  attack: 5,
-  health: 25,
-  maxHealth: 25,
-  gold: 0,
-  level: 1,
-  experience: 0,
-  attackSpeed: 1000,
-  isAlive: true,
-};
+// const playerTemplate = {
+//   name: "Soren",
+//   image: "images/Owlimage.png",
+//   attack: 5,
+//   health: 25,
+//   maxHealth: 25,
+//   gold: 0,
+//   level: 1,
+//   experience: 0,
+//   attackSpeed: 1000,
+//   isAlive: true,
+// };
 
 /**
  * Generates a copy of an enemy that you wish to fight against.
@@ -84,7 +86,7 @@ function generateNewEnemy(enemyType = "worm") {
 function GameContainer() {
   const [currentEnemy, setCurrentEnemy] = useState(generateNewEnemy());
   const [currentEnemyKey, setCurrentEnemyKey] = useState("worm");
-  const [player, setPlayer] = useState({ ...playerTemplate });
+  const [player, setPlayer] = useAtom(playerData);
   const [expToNextLevel, setExpToNextLevel] = useState(10);
   const [currentView, setCurrentView] = useState("home");
 

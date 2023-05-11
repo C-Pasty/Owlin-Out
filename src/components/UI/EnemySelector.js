@@ -2,7 +2,6 @@ import "./EnemySelector.css";
 
 function EnemySelector(props) {
   function enemyChangeHandler(event) {
-    // event.target.value
     props.enemyKeyUpdater(event.target.value);
   }
 
@@ -17,9 +16,6 @@ function EnemySelector(props) {
           {props.enemyChoices[enemyName].name}
         </option>
       ))}
-      {/* <option value={"worm1"}>Worm 1</option>
-      <option>Worm 2</option>
-      <option>Worm 3</option> */}
     </select>
   );
 }

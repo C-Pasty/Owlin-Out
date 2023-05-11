@@ -4,17 +4,20 @@ import Enemy from "../Enemy/Enemy";
 import AttackButton from "../UI/AttackButton";
 import EnemySelector from "../UI/EnemySelector";
 import PlayerStats from "../Player/PlayerStats";
+import MenuButtons from "../UI/MenuButtons";
+import GameTitle from "../UI/GameTitle";
+import Shop from "../UI/Shop";
 import "./GameContainer.css";
 
 const possibleEnemies = {
   worm: {
     name: "Worm",
-    image: "images/Wormimage.PNG",
+    image: "images/Wormimage.png",
     attack: 3,
     health: 25,
     maxHealth: 25,
     experienceGranted: 2,
-    goldGranted: 1,
+    goldGranted: 2,
     isAlive: true,
   },
   wormLv2: {
@@ -83,6 +86,11 @@ function GameContainer() {
   const [currentEnemyKey, setCurrentEnemyKey] = useState("worm");
   const [player, setPlayer] = useState({ ...playerTemplate });
   const [expToNextLevel, setExpToNextLevel] = useState(10);
+  const [currentView, setCurrentView] = useState("home");
+
+  function changeViewUpdater(newView) {
+    setCurrentView(newView);
+  }
 
   useEffect(() => {
     if (currentEnemy.health <= 0) {
@@ -98,6 +106,21 @@ function GameContainer() {
       }));
     }
   }, [currentEnemy.health]);
+
+  useEffect(() => {
+    const healthRegen = setInterval(() => {
+      if (player.health < player.maxHealth && player.isAlive) {
+        setPlayer((state) => {
+          return {
+            ...state,
+            health: Math.min(state.health + 5, state.maxHealth),
+          };
+        });
+      }
+    }, 5000);
+
+    return () => clearInterval(healthRegen);
+  }, [player.health, player.isAlive]);
 
   useEffect(() => {
     if (player.experience >= expToNextLevel) {
@@ -154,23 +177,34 @@ function GameContainer() {
   return (
     <div className="game-container">
       <PlayerStats player={player} expToNextLevel={expToNextLevel} />
-      <Player player={player} />
-      <AttackButton
-        currentEnemy={currentEnemy}
-        currentEnemyUpdater={setCurrentEnemy}
-        player={player}
-        playerUpdater={setPlayer}
-      />
-      <div className="enemy-container">
-        <div className="enemy-selector-wrapper">
-          <EnemySelector
-            enemyChoices={possibleEnemies}
-            enemyKey={currentEnemyKey}
-            enemyKeyUpdater={setCurrentEnemyKey}
+      <MenuButtons changeViewUpdater={changeViewUpdater} />
+      {currentView === "home" && (
+        <>
+          <GameTitle />
+          <Player player={player} />
+          <AttackButton
+            currentEnemy={currentEnemy}
+            currentEnemyUpdater={setCurrentEnemy}
+            player={player}
+            playerUpdater={setPlayer}
           />
+          <div className="enemy-container">
+            <div className="enemy-selector-wrapper">
+              <EnemySelector
+                enemyChoices={possibleEnemies}
+                enemyKey={currentEnemyKey}
+                enemyKeyUpdater={setCurrentEnemyKey}
+              />
+            </div>
+            <Enemy stats={currentEnemy} />
+          </div>
+        </>
+      )}
+      {currentView === "shop" && (
+        <div>
+          <Shop player={player} playerUpdater={setPlayer} />
         </div>
-        <Enemy stats={currentEnemy} />
-      </div>
+      )}
     </div>
   );
 }

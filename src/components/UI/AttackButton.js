@@ -3,12 +3,10 @@ import "./AttackButton.css";
 
 function AttackButton(props) {
   function attackHandler() {
-    const newEnemy = {
-      ...props.currentEnemy,
-      health: props.currentEnemy.health - props.player.attack,
-    };
-
-    props.currentEnemyUpdater(newEnemy);
+    props.currentEnemyUpdater((state) => ({
+      ...state,
+      health: state.health - props.player.attack,
+    }));
     props.playerUpdater((state) => ({
       ...state,
       health: state.health - props.currentEnemy.attack,

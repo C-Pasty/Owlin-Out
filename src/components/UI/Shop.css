@@ -1,0 +1,61 @@
+.shop-container {
+  display: flex;
+  justify-content: space-around; /* Change from space-between to space-around */
+  align-items: center;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+.upgrade-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: #626161; /* Add background color */
+  padding: 12px; /* Add padding */
+  border-radius: 6px; /* Add border-radius */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Add box-shadow */
+  margin-bottom: 10px; /* Add margin at the bottom */
+}
+
+.upgrade-name {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.upgrade-button {
+  background-color: #3498db;
+  border: none;
+  color: white;
+  text-align: center;
+  font-size: 14px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 10px;
+}
+
+.upgrade-button:hover {
+  background-color: #2980b9;
+}
+
+.upgrade-button:focus {
+  outline: none;
+}
+
+.upgrade-button:active {
+  transform: translateY(-2px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.shop-title {
+  font-size: 2rem;
+  font-weight: bold;
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  color: white;
+}

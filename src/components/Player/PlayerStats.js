@@ -12,8 +12,10 @@ function PlayerStats(props) {
         Health: {props.player.health}/{props.player.maxHealth}
       </div>
       <div>Gold: {props.player.gold}</div>
+
       <div>
-        Experience: {props.player.experience}/{props.expToNextLevel}
+        Experience:{" "}
+        {`${props.player.experience}/${props.player.experienceToNextLevel}`}
       </div>
     </div>
   );

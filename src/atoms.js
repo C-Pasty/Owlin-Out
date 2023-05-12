@@ -8,6 +8,7 @@ const playerTemplate = {
   gold: 0,
   level: 1,
   experience: 0,
+  experienceToNextLevel: 10,
   attackSpeed: 1000,
   isAlive: true,
 };

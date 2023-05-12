@@ -44,19 +44,6 @@ const possibleEnemies = {
   },
 };
 
-// const playerTemplate = {
-//   name: "Soren",
-//   image: "images/Owlimage.png",
-//   attack: 5,
-//   health: 25,
-//   maxHealth: 25,
-//   gold: 0,
-//   level: 1,
-//   experience: 0,
-//   attackSpeed: 1000,
-//   isAlive: true,
-// };
-
 /**
  * Generates a copy of an enemy that you wish to fight against.
  * if the supplied key does not exist, it will return a random enemy.
@@ -87,7 +74,6 @@ function GameContainer() {
   const [currentEnemy, setCurrentEnemy] = useState(generateNewEnemy());
   const [currentEnemyKey, setCurrentEnemyKey] = useState("worm");
   const [player, setPlayer] = useAtom(playerData);
-  const [expToNextLevel, setExpToNextLevel] = useState(10);
   const [currentView, setCurrentView] = useState("home");
 
   function changeViewUpdater(newView) {
@@ -125,7 +111,7 @@ function GameContainer() {
   }, [player.health, player.isAlive]);
 
   useEffect(() => {
-    if (player.experience >= expToNextLevel) {
+    if (player.experience >= player.experienceToNextLevel) {
       setPlayer((state) => {
         const newMaxHealth = state.maxHealth + 10;
         return {
@@ -134,9 +120,11 @@ function GameContainer() {
           attack: state.attack + 3,
           maxHealth: newMaxHealth,
           health: newMaxHealth,
+          experienceToNextLevel: Math.floor(
+            (state.experienceToNextLevel + 10) * 1.2
+          ),
         };
       });
-      setExpToNextLevel(Math.floor((expToNextLevel + 10) * 1.2));
     }
   }, [player.experience]);
 
@@ -178,7 +166,7 @@ function GameContainer() {
 
   return (
     <div className="game-container">
-      <PlayerStats player={player} expToNextLevel={expToNextLevel} />
+      <PlayerStats player={player} />
       <MenuButtons changeViewUpdater={changeViewUpdater} />
       {currentView === "home" && (
         <>

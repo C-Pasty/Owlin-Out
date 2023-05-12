@@ -20,7 +20,7 @@ const Shop = (props) => {
       <div className="shop-container">
         <div className="upgrade-container">
           <div className="upgrade-name">Upgrade Attack +5</div>
-          <div className="upgrade-name">Cost: 5 Gold</div>
+          <div className="upgrade-name">Cost: 10 Gold</div>
           <button className="upgrade-button" onClick={upgradeAttack}>
             Purchase
           </button>
